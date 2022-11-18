@@ -28,7 +28,7 @@ in `.bashrc` with corresponding cuda version for different az machine so that nv
 Link [Brats](https://www.kaggle.com/datasets/dschettler8845/brats-2021-task1)  
 The raw data (13G) is in `/data01/yichi5/brats_data`. You can also download them from the link above. To register and preprocess this dataset to be a tensorflow dataset, run `./brats/brats_test.py`. 
 
-## Current Problems
+## Current Issues
 CUDA Out of Memory (OOM)  
 To avoid this, I changed the batch size to 16 and ran the training process for brats dataset on 4 RTX2080. The generated images lose detailed information. Might be caused by the changing of the batch size. The training process uses about 9GB for each GPU so at most 40GB in total. However, when I trained this model on one RTX A6000 which has 48GB, it failed by OOM. Also, I tried to train cifar10 on one RTX A6000 and it also failed by OOM. 
 
