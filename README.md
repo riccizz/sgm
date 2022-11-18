@@ -25,7 +25,7 @@ export LD_LIBRARY_PATH="/usr/local/cuda-11.4/lib64:$LD_LIBRARY_PATH"
 in `.bashrc` with corresponding cuda version for different az machine so that nvcc is working. Or if you use conda, load the conda lib path. 
 
 ## Dataset Brats
-Link [Brats](https://www.kaggle.com/datasets/dschettler8845/brats-2021-task1)
+Link [Brats](https://www.kaggle.com/datasets/dschettler8845/brats-2021-task1)  
 The raw data (13G) is in `/data01/yichi5/brats_data`. You can also download them from the link above. To register and preprocess this dataset to be a tensorflow dataset, run `./brats/brats_test.py`. 
 
 ## Current Problems
