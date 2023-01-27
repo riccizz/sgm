@@ -100,7 +100,7 @@ def train(config, workdir):
 
   # MRI
   dataset = Brats(transform=transforms.ToTensor())
-  train_dataset, test_dataset = torch.utils.data.random_split(dataset, [90000, 2897])
+  train_dataset, test_dataset = torch.utils.data.random_split(dataset, [90000, 2897], generator=torch.Generator().manual_seed(99))
   train_iter = cycle(DataLoader(dataset=train_dataset, batch_size = config.training.batch_size, shuffle = True, pin_memory = True))
   eval_iter = cycle(DataLoader(dataset=test_dataset, batch_size = config.eval.batch_size, shuffle = False, pin_memory = True))
 
