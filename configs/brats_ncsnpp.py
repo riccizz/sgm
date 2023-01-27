@@ -23,27 +23,29 @@ def get_config():
   config = get_default_configs()
   # training
   training = config.training
-  training.batch_size = 1
-  training.n_iters = 10001
+  training.batch_size = 64
+  training.n_iters = 2400001
   training.snapshot_sampling = True
-  training.snapshot_freq = 500
+  training.snapshot_freq = 100000
   training.sde = 'vesde'
   training.continuous = True
-  training.snapshot_freq_for_preemption = 500
+  training.snapshot_freq_for_preemption = 100000
   # eval
   evaluate = config.eval
-  evaluate.begin_ckpt = 9
-  evaluate.end_ckpt = 20
+  evaluate.begin_ckpt = 1
+  evaluate.end_ckpt = 9
   evaluate.batch_size = 128
   evaluate.num_samples = 500
-  evaluate.ckpt_id = 20
+  # evaluate.ckpt_id = 20
   evaluate.enable_sampling = True
   # sampling
   sampling = config.sampling
   sampling.method = 'pc'
+  sampling.cs_solver = 'projection'
   sampling.predictor = 'reverse_diffusion'
   sampling.corrector = 'langevin'
-  sampling.n_projections = 30
+  sampling.n_projections = 10
+  sampling.projection_sigma_rate = 1.586
   sampling.task = 'mri'
   sampling.snr = 0.517
   sampling.coeff = 1.0
