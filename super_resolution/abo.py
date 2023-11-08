@@ -108,7 +108,7 @@ def get_projection_sampler(config, sde, shape, predictor, corrector,
       #   x_space = merge_known_with_mask(config, x_space, known, mask, 1.)
       #   x = from_space(x_space)
 
-      return inverse_scaler(x)
+    return inverse_scaler(x)
 
   return projection_sampler
 
