@@ -104,6 +104,7 @@ class SDE(abc.ABC):
         f, G = discretize_fn(x, t)
         rev_f = f - G[:, None, None, None] ** 2 * score_fn(x, t) * (0.5 if self.probability_flow else 1.)
         rev_G = torch.zeros_like(G) if self.probability_flow else G
+        # print(f"predictor score: {torch.sqrt(torch.sum(score_fn(x, t)**2)):.3f}")
         return rev_f, rev_G
 
     return RSDE()

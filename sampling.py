@@ -26,6 +26,7 @@ from models.utils import from_flattened_numpy, to_flattened_numpy, get_score_fn
 from scipy import integrate
 import sde_lib
 from models import utils as mutils
+from tqdm import tqdm
 
 _CORRECTORS = {}
 _PREDICTORS = {}
@@ -272,6 +273,7 @@ class LangevinCorrector(Corrector):
 
     for i in range(n_steps):
       grad = score_fn(x, t)
+      # print(f"corrector score: {torch.sqrt(torch.sum(grad**2)):.3f}")
       noise = torch.randn_like(x)
       grad_norm = torch.norm(grad.reshape(grad.shape[0], -1), dim=-1).mean()
       noise_norm = torch.norm(noise.reshape(noise.shape[0], -1), dim=-1).mean()
@@ -400,7 +402,7 @@ def get_pc_sampler(sde, shape, predictor, corrector, inverse_scaler, snr,
       x = sde.prior_sampling(shape).to(device)
       timesteps = torch.linspace(sde.T, eps, sde.N, device=device)
 
-      for i in range(sde.N):
+      for i in tqdm(range(sde.N)):
         t = timesteps[i]
         vec_t = torch.ones(shape[0], device=t.device) * t
         x, x_mean = corrector_update_fn(x, vec_t, model=model)
